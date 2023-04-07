@@ -1,0 +1,6 @@
+a=int(input())
+b=input()
+p=a*int(b[2])
+q=a*int(b[1])
+r=a*int(b[0])
+print(p,q,r,p+q*10+r*100, sep="\n")
