@@ -1,16 +1,11 @@
 N = int(input())
-arr = []
-for n in range(1, N+1):
-    arr.append(n)
 
 
-def multiply(arr):
-    ans = 1
-    for n in arr:
-        if n == 0:
-            return 0
-        ans *= n
-    return print(ans)
+def factorial(n):
+    if n > 0:
+        return n*factorial(n-1)
+    else:
+        return 1
 
 
-multiply(arr)
+print(factorial(N))
