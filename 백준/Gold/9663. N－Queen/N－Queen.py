@@ -19,9 +19,9 @@ def recursion(x):
     if x == N:
         count += 1
     else:
-        for i in range(N):
-            # (x,i)좌표에 퀸을 놓는다.
-            row[x] = i
+        for y in range(N):
+            # (x,y)좌표에 퀸을 놓는다.
+            row[x] = y
             # 퀸을 해당위치에 넣을 수 있는지 없는지 확인
             if check(x):
                 recursion(x+1)
