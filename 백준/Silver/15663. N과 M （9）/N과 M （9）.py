@@ -9,7 +9,7 @@ visited = [0]*N
 prev_dupl = 0
 
 
-def dfs(x):
+def dfs():
     prev_dupl = 0
     if len(ans) == M:
         print(" ".join(map(str, ans)))
@@ -20,9 +20,9 @@ def dfs(x):
             ans.append(nums[i])
             prev_dupl = nums[i]
             visited[i] = 1
-            dfs(x+1)
+            dfs()
             ans.pop()
             visited[i] = 0
 
 
-dfs(0)
+dfs()
