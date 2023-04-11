@@ -1,23 +1,24 @@
-T = int(input())
-arr = []
-for _ in range(T):
-    n = int(input())
-    arr.append(n)
+import sys, math, queue
 
+prime_list = []
 
-def isPrime(partition):
-    for x in range(2, partition):
-        if partition % x == 0:
-            return False
-    return True
-
-
-for num in arr:
-    partition1, partition2 = num//2, num//2
-    while partition1 > 0:
-        if isPrime(partition1) and isPrime(partition2):
-            print(partition1, partition2)
+for i in range(2, 10001):
+    isPrime = True
+    for prime in prime_list:
+        if i % prime == 0:
+            isPrime = False
             break
-        else:
-            partition1 -= 1
-            partition2 += 1
+    if isPrime:
+        prime_list.append(i)
+
+t = int(sys.stdin.readline())
+
+for _ in range(t):
+    n = int(sys.stdin.readline())
+
+    for i in range(0, n//2):
+        a = n//2 - i
+        b = n//2 + i
+        if a in prime_list and b in prime_list:
+            print(str(a) + ' ' + str(b))
+            break
