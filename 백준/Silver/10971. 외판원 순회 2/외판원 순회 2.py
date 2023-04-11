@@ -24,7 +24,7 @@ def dfs(x, start, cost):
         if (visited[i] == 0) and (city[start][i] != 0):
             # 방문 체크
             visited[i] = 1
-            """ start인자 자리에 i를 넣는 이유 -> 같은도시로는 이동할 수 없기 때문.
+            """ start인자 자리에 i를 넣는 이유 -> 같은도시로의 이동을 막기 위해 (24line 코드 실행)
             이 로직이 실행된 i값이 곧 도착하는 도시(=city의 인덱스 값)"""
             dfs(x+1, i, cost+city[start][i])
             # 계속 나머지 루트들을 순회하기 위해 방문x 처리.
