@@ -31,6 +31,7 @@ def dfs(x, y, precipitation):
 
 for precipitation in range(min_precipitation, max_precipitation):
     _count = 0
+    # 강수량에 따라 지역을 체크하기 떄문에 for문을 돌리면서 방문기록을 초기화.
     visited = [[0]*N for _ in range(N)]
     for i in range(N):
         for j in range(N):
