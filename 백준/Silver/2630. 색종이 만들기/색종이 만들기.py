@@ -10,10 +10,13 @@ for _ in range(N):
 blue = 1
 white = 0
 
-answer = []
+count_blue = 0
+count_white = 0
 
 
 def recursion(size, x, y):
+    global count_blue
+    global count_white
     color = arr[x][y]
     for i in range(x, x+size):
         for j in range(y, y+size):
@@ -24,12 +27,12 @@ def recursion(size, x, y):
                 recursion(size//2, x+size//2, y+size//2)
                 return
     if color == white:
-        answer.append(0)
+        count_white += 1
     elif color == blue:
-        answer.append(1)
+        count_blue += 1
 
 
 recursion(N, 0, 0)
 
-print(answer.count(0))
-print(answer.count(1))
+print(count_white)
+print(count_blue)
