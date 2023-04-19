@@ -17,7 +17,6 @@ cards = list(map(int, sys.stdin.readline().split()))
 for card in cards:
     start = 0
     end = N-1
-    count = 0
     while start <= end:
         mid = (start+end)//2
         if card > nums[mid]:
