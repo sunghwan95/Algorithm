@@ -10,21 +10,21 @@ while True:
         break
 
 
-def divide_tree(arr):
-    left_side = []
-    right_side = []
+def binary_search_tree(arr):
+    sub_left = []
+    sub_right = []
     if arr:
-        parent = arr.pop(0)
-        for num in arr:
-            if num < parent:
-                left_side.append(num)
+        root = arr.pop(0)
+        for node in arr:
+            if node < root:
+                sub_left.append(node)
             else:
-                right_side.append(num)
-        divide_tree(left_side)
-        divide_tree(right_side)
-        print(parent)
+                sub_right.append(node)
+        binary_search_tree(sub_left)
+        binary_search_tree(sub_right)
+        print(root)
     else:
         return
 
 
-divide_tree(nums)
+binary_search_tree(nums)
