@@ -1,3 +1,5 @@
+# 크루스칼 알고리즘
+
 import sys
 input = sys.stdin.readline
 
