@@ -1,5 +1,3 @@
-# 크루스칼 알고리즘
-
 import sys
 input = sys.stdin.readline
 
@@ -10,9 +8,13 @@ for _ in range(E):
 
 E_arr.sort(key=lambda x: x[2])
 
+parent = [0]*(V+1)
+for i in range(V+1):
+    parent[i] = i
+
 
 def find(x):
-    if x != parent[x]:
+    if parent[x] != x:
         parent[x] = find(parent[x])
     return parent[x]
 
@@ -26,10 +28,6 @@ def union(a, b):
     else:
         parent[a] = b
 
-
-parent = [0]*(V+1)
-for i in range(1, V+1):
-    parent[i] = i
 
 answer = 0
 for a, b, c in E_arr:
