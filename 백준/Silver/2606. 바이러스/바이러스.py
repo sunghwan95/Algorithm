@@ -1,25 +1,26 @@
+import sys
+input = sys.stdin.readline
+
 N = int(input())
 M = int(input())
-
 visited = [0]*(N+1)
 
-coms = [[] for _ in range(N+1)]
-count = 0
-
-
-for i in range(M):
+graph = [[] for _ in range(N+1)]
+for _ in range(M):
     a, b = map(int, input().split())
-    coms[a].append(b)
-    coms[b].append(a)
+    graph[a].append(b)
+    graph[b].append(a)
+
+count = 0
 
 
 def dfs(x):
     global count
     visited[x] = 1
-    for i in coms[x]:
+    for i in graph[x]:
         if visited[i] == 0:
-            count += 1
             dfs(i)
+            count += 1
 
 
 dfs(1)
