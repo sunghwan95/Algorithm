@@ -10,7 +10,7 @@ def dfs(x):
             if visited[x][1] == 1:
                 visited[i][0] = 1
                 visited[i][1] = -1
-            if visited[x][1] == -1:
+            elif visited[x][1] == -1:
                 visited[i][0] = 1
                 visited[i][1] = 1
             dfs(i)
