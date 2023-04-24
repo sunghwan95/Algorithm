@@ -3,18 +3,14 @@ input = sys.stdin.readline
 sys.setrecursionlimit(10**9)
 
 N = int(input())
-string = list(map(str, input().rstrip()))
-in_out = ["-1"]
-for i in string:
-    in_out.append(i)
-
+in_out = [" "] + list(map(str, input().rstrip()))
+visited = [0 for _ in range(N+1)]
 graph = [[] for _ in range(N+1)]
 for _ in range(N-1):
     a, b = map(int, input().split())
     graph[a].append(b)
     graph[b].append(a)
 
-visited = [0 for _ in range(N+1)]
 
 count = 0
 
@@ -24,7 +20,6 @@ def dfs(x, start):
     if in_out[x] == "1":
         count += 2
         return
-
     for _next in graph[x]:
         if visited[_next] == 0:
             visited[_next] = 1
