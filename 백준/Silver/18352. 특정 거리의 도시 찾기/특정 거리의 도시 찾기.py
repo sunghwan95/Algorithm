@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 input = sys.stdin.readline
 
 N, M, K, X = map(int, input().split())
@@ -7,17 +8,19 @@ for _ in range(M):
     a, b = map(int, input().split())
     graph[a].append(b)
 
-distance = [-1]*(N+1)
-distance[X] = 0
+visited = [0]*(N+1)
+distance = [0]*(N+1)
 
 
 def bfs(start):
-    arr = [start]
+    arr = deque([start])
     while arr:
-        now = arr.pop(0)
+        now = arr.popleft()
+        visited[now] = 1
 
         for _next in graph[now]:
-            if distance[_next] == -1:
+            if visited[_next] == 0:
+                visited[_next] = 1
                 distance[_next] = distance[now]+1
                 arr.append(_next)
 
