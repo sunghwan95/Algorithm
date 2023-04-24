@@ -14,21 +14,26 @@ start, destination = map(int, input().split())
 costs = [1e9]*(N+1)
 costs[start] = 0
 heap = []
-heapq.heappush(heap, (0, start))
 
-while heap:
-    now_cost, start = heapq.heappop(heap)
 
-    if now_cost > costs[start]:
-        continue
+def bfs(cost, start, destination):
+    heapq.heappush(heap, (cost, start))
+    while heap:
+        now_cost, start = heapq.heappop(heap)
 
-    for i in graph[start]:
-        next_cost, end = i
-        new_cost = next_cost+now_cost
-        if costs[end] > new_cost:
-            costs[end] = new_cost
-            heapq.heappush(heap, (new_cost, end))
-        else:
+        if now_cost > costs[start]:
             continue
 
-print(costs[destination])
+        for i in graph[start]:
+            next_cost, end = i
+            new_cost = next_cost+now_cost
+            if costs[end] > new_cost:
+                costs[end] = new_cost
+                heapq.heappush(heap, (new_cost, end))
+            else:
+                continue
+
+    print(costs[destination])
+
+
+bfs(0, start, destination)
