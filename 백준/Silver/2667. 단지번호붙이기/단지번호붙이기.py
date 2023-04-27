@@ -16,9 +16,6 @@ def bfs(a, b):
     queue = []
     queue.append((a, b))
 
-    visited = [[0]*N for _ in range(N)]
-    visited[a][b] = 1
-
     count = 1
 
     while queue:
@@ -30,8 +27,7 @@ def bfs(a, b):
 
             if nx < 0 or nx >= N or ny < 0 or ny >= N:
                 continue
-            if graph[nx][ny] == 1 and visited[nx][ny] == 0:
-                visited[nx][ny] = 1
+            if graph[nx][ny] == 1:
                 graph[nx][ny] = 0
                 queue.append((nx, ny))
                 count += 1
