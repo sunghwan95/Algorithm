@@ -15,14 +15,10 @@ def dfs(x, y):
     if graph[x][y] == '|':
         if x+1 < N and graph[x+1][y] == '|' and visited[x+1][y] == 0:
             dfs(x+1, y)
-        else:
-            return
 
     if graph[x][y] == '-':
         if y+1 < M and graph[x][y+1] == '-' and visited[x][y+1] == 0:
             dfs(x, y+1)
-        else:
-            return
 
 
 count = 0
