@@ -9,11 +9,8 @@ arr_2 = []
 for num in nums:
     a = num.split("+")
     for i in a:
-        if i.startswith("0"):
-            i = int(i)
-            arr_2.append(i)
-        else:
-            arr_2.append(int(i))
+        i=int(i)
+        arr_2.append(i)
     arr.append(sum(arr_2))
     arr_2 = []
 
