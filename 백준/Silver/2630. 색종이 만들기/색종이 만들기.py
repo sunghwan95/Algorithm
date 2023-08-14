@@ -1,38 +1,33 @@
 import sys
+input = sys.stdin.readline
 
-N = int(sys.stdin.readline())
+N = int(input())
 
-arr = []
+papers = []
 for _ in range(N):
-    a = list(map(int, sys.stdin.readline().split()))
-    arr.append(a)
+    row = list(map(int, input().split()))
+    papers.append(row)
 
-blue = 1
-white = 0
-
-count_blue = 0
-count_white = 0
+ans = []
 
 
-def recursion(size, x, y):
-    global count_blue
-    global count_white
-    color = arr[x][y]
+def recursion(x, y, size):
+    color = papers[x][y]
     for i in range(x, x+size):
         for j in range(y, y+size):
-            if color != arr[i][j]:
-                recursion(size//2, x,         y)
-                recursion(size//2, x+size//2, y)
-                recursion(size//2, x,         y+size//2)
-                recursion(size//2, x+size//2, y+size//2)
+            if color != papers[i][j]:
+                recursion(x,         y,         size//2)
+                recursion(x+size//2, y,         size//2)
+                recursion(x,         y+size//2, size//2)
+                recursion(x+size//2, y+size//2, size//2)
                 return
-    if color == white:
-        count_white += 1
-    elif color == blue:
-        count_blue += 1
+
+    if color == 1:
+        ans.append(1)
+    else:
+        ans.append(0)
 
 
-recursion(N, 0, 0)
+recursion(0, 0, N)
 
-print(count_white)
-print(count_blue)
+print(ans.count(0), ans.count(1), sep="\n")
