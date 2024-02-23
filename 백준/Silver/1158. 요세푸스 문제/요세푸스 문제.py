@@ -4,19 +4,13 @@ from collections import deque
 input = sys.stdin.readline()
 
 N, K = map(int, (input.split()))
-queue = deque(list(range(1, N + 1)))
+queue = list(range(1, N + 1))
 
 ans = []
 
-temp = 1
-while len(queue) >= 1:
-    if temp != K:
-        queue.append(queue.popleft())
-        temp += 1
-    else:
-        ans.append(queue.popleft())
-        temp = 1
+i = 0
+while queue:
+    i = (i + K - 1) % len(queue)
+    ans.append(queue.pop(i))
 
-res = ans + list(queue)
-
-print("<" + ", ".join(map(str, res)) + ">")
+print("<" + ", ".join(map(str, ans)) + ">")
