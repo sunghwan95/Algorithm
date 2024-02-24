@@ -1,27 +1,59 @@
 import sys
-N = int(sys.stdin.readline())
 
+input = sys.stdin.readline
+
+N = int(input())
 stk = []
+ans = []
+
+
+def push(stk: list, arg: int):
+    stk.append(arg)
+    return
+
+
+def popArg(stk: list):
+    if stk:
+        ans.append(stk.pop())
+    else:
+        ans.append(-1)
+    return
+
+
+def sizeStk(stk: list):
+    ans.append(len(stk))
+    return
+
+
+def isEmpty(stk: list):
+    if stk:
+        ans.append(0)
+    else:
+        ans.append(1)
+    return
+
+
+def topArg(stk: list):
+    if stk:
+        ans.append(stk[-1])
+    else:
+        ans.append(-1)
+    return
+
+
 for _ in range(N):
-    arr = list(map(str, sys.stdin.readline().split()))
-    if arr[0] == "push":
-        stk.append(arr[1])
-    elif arr[0] == "top":
-        try:
-            print(stk[-1])
-        except IndexError:
-            print(-1)
-            continue
-    elif arr[0] == "size":
-        print(len(stk))
-    elif arr[0] == "pop":
-        try:
-            print(stk.pop())
-        except IndexError:
-            print(-1)
-            continue
-    elif arr[0] == "empty":
-        if len(stk) == 0:
-            print(1)
-        else:
-            print(0)
+    cmd = input().split()
+    keyWord = cmd[0]
+
+    if keyWord == "push":
+        push(stk, int(cmd[1]))
+    elif keyWord == "top":
+        topArg(stk)
+    elif keyWord == "size":
+        sizeStk(stk)
+    elif keyWord == "pop":
+        popArg(stk)
+    else:
+        isEmpty(stk)
+
+print(*ans, sep="\n")
