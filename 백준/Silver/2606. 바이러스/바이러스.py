@@ -1,27 +1,33 @@
 import sys
+
 input = sys.stdin.readline
 
 N = int(input())
 M = int(input())
-visited = [0]*(N+1)
+graph = [[0 for _ in range(N + 1)] for _ in range(N + 1)]
+visited = [0 for _ in range(N + 1)]
 
-graph = [[] for _ in range(N+1)]
 for _ in range(M):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    graph[a][b] = graph[b][a] = 1
 
-count = 0
-
-
-def dfs(x):
-    global count
-    visited[x] = 1
-    for i in graph[x]:
-        if visited[i] == 0:
-            dfs(i)
-            count += 1
+ans = []
 
 
-dfs(1)
-print(count)
+def bfs(startingNode):
+    queue = []
+    queue.append(startingNode)
+    visited[startingNode] = 1
+
+    while queue:
+        visitedNode = queue.pop(0)
+
+        for visitingNode in range(1, N + 1):
+            if graph[visitedNode][visitingNode] == 1 and visited[visitingNode] == 0:
+                visited[visitingNode] = 1
+                queue.append(visitingNode)
+                ans.append(visitingNode)
+
+
+bfs(1)
+print(len(ans))
