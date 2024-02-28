@@ -1,44 +1,44 @@
 import sys
-from collections import deque
+
 input = sys.stdin.readline
 
+T = int(input())
 
-def bfs(x, y):
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
+
+
+def bfs():
     while queue:
-        (x, y) = queue.popleft()
+        (x, y) = queue.pop(0)
 
         for i in range(4):
-            nx = x+dx[i]
-            ny = y+dy[i]
-
-            if 0 <= nx < N and 0 <= ny < M:
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < M and 0 <= ny < N:
                 if graph[nx][ny] == 1 and visited[nx][ny] == 0:
-                    queue.append((nx, ny))
                     visited[nx][ny] = 1
-                else:
-                    continue
-    return
+                    queue.append((nx, ny))
 
 
-T = int(input())
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
 for _ in range(T):
     M, N, K = map(int, input().split())
-    graph = [[0 for _ in range(M)] for _ in range(N)]
-    visited = [[0 for _ in range(M)] for _ in range(N)]
-    queue = deque()
-    count = 0
+
+    graph = [[0 for _ in range(N)] for _ in range(M)]
+    visited = [[0 for _ in range(N)] for _ in range(M)]
 
     for _ in range(K):
-        Y, X = map(int, input().split())
-        graph[X][Y] = 1
+        a, b = map(int, input().split())
+        graph[a][b] = 1
 
-    for x in range(N):
-        for y in range(M):
+    queue = []
+    count = 0
+
+    for x in range(M):
+        for y in range(N):
             if graph[x][y] == 1 and visited[x][y] == 0:
-                visited[x][y] = 1
                 queue.append((x, y))
-                bfs(x, y)
+                bfs()
                 count += 1
+
     print(count)
