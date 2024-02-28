@@ -1,42 +1,39 @@
-from collections import deque
 import sys
+
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
 
 graph = []
+visited = [[0 for _ in range(M)] for _ in range(N)]
+
 for _ in range(N):
-    graph.append(list(map(int, input().rstrip())))
-visited = [[0]*(M) for _ in range(N)]
-# print(f'graph : {graph}')
-# print(f'visited : {visited}')
+    _list = list(map(int, input().rstrip()))
+    graph.append(_list)
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
 
-def bfs(x, y):
-    dx = [0, 0, -1, 1]
-    dy = [-1, 1, 0, 0]
-
-    coordinate = deque()
-    coordinate.append((x, y))
-    visited[x][y] = 1
-    while coordinate:
-        x, y = coordinate.popleft()
-
+def bfs():
+    while queue:
+        (x, y) = queue.pop(0)
         for i in range(4):
-            nx = x+dx[i]
-            ny = y+dy[i]
-
-            if nx < 0 or nx >= N or ny < 0 or ny >= M:
-                continue
-
-            if graph[nx][ny] == 0:
-                continue
-
-            if visited[nx][ny] == 0:
-                graph[nx][ny] += graph[x][y]
-                visited[nx][ny] = 1
-                coordinate.append((nx, ny))
-    print(graph[-1][-1])
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < N and 0 <= ny < M:
+                if graph[nx][ny] == 1 and visited[nx][ny] == 0:
+                    visited[nx][ny] = 1
+                    queue.append((nx, ny))
+                    graph[nx][ny] += graph[x][y]
 
 
-bfs(0, 0)
+queue = []
+for x in range(N):
+    for y in range(M):
+        if graph[x][y] == 1 and visited[x][y] == 0:
+            visited[x][y] = 1
+            queue.append((x, y))
+            bfs()
+
+print(graph[-1][-1])
