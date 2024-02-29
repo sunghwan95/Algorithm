@@ -4,45 +4,44 @@ input = sys.stdin.readline
 N = int(input())
 
 graph = []
+visited = [[0 for _ in range(N)] for _ in range(N)]
 for _ in range(N):
-    a = list(map(int, input().rstrip()))
-    graph.append(a)
-
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+    _list = list(map(int, input().rstrip()))
+    graph.append(_list)
 
 
-def bfs(a, b):
+res = []
+def bfs(x, y):
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+
     queue = []
-    queue.append((a, b))
-
-    count = 1
+    queue.append((x, y))
+    houseCount = 1
 
     while queue:
         x, y = queue.pop(0)
 
         for i in range(4):
-            nx = x+dx[i]
-            ny = y+dy[i]
+            nx = x + dx[i]
+            ny = y + dy[i]
 
-            if nx < 0 or nx >= N or ny < 0 or ny >= N:
-                continue
-            if graph[nx][ny] == 1:
-                graph[nx][ny] = 0
-                queue.append((nx, ny))
-                count += 1
-    return count
+            if 0 <= nx < N and 0 <= ny < N:
+                if graph[nx][ny] == 1 and visited[nx][ny] == 0:
+                    visited[nx][ny] = 1
+                    queue.append((nx, ny))
+                    houseCount += 1
+    res.append(houseCount)
 
 
-result = []
-for a in range(N):
-    for b in range(N):
-        if graph[a][b] == 1:
-            graph[a][b] = 0
-            result.append(bfs(a, b))
+count = 0
+for x in range(N):
+    for y in range(N):
+        if graph[x][y] == 1 and visited[x][y] == 0:
+            visited[x][y] = 1
+            bfs(x, y)
+            count += 1
 
-result.sort()
-print(len(result))
-
-for i in result:
-    print(i)
+res.sort()
+print(count)
+print(*res, sep="\n")
