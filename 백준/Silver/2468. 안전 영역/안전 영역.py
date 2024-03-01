@@ -1,44 +1,46 @@
 import sys
-sys.setrecursionlimit(10**7)
 
-N = int(sys.stdin.readline())
-safeZone = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-count = 1
+input = sys.stdin.readline
 
-precipitation = []
-for i in range(N):
-    for j in range(N):
-        precipitation.append(safeZone[i][j])
+N = int(input())
+graph = []
+for _ in range(N):
+    _list = list(map(int, input().split()))
+    graph.append(_list)
 
-min_precipitation = min(precipitation)
-max_precipitation = max(precipitation)
-
-# 상,하,좌,우
-dx = [0, 0, -1, 1]
-dy = [-1, 1, 0, 0]
+max_precipitations = []
+for _graph in graph:
+    max_precipitations.append(max(_graph))
 
 
-def dfs(x, y, precipitation):
-    # 상,하,좌,우 순으로 인접지역 탐색
-    for i in range(4):
-        nx = x+dx[i]
-        ny = y+dy[i]
-        # 인접지역의 유효성 검사
-        if (0 <= nx < N) and (0 <= ny < N) and (safeZone[nx][ny] > precipitation) and (visited[nx][ny] == 0):
-            visited[nx][ny] = 1
-            dfs(nx, ny, precipitation)
+def bfs(a, b, c):
+    queue = []
+    queue.append((a, b))
+
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+    while queue:
+        x, y = queue.pop(0)
+
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < N and 0 <= ny < N:
+                if graph[nx][ny] > c and visited[nx][ny] == 0:
+                    visited[nx][ny] = 1
+                    queue.append((nx, ny))
 
 
-for precipitation in range(min_precipitation, max_precipitation):
-    _count = 0
-    # 강수량에 따라 지역을 체크하기 떄문에 for문을 돌리면서 방문기록을 초기화.
-    visited = [[0]*N for _ in range(N)]
-    for i in range(N):
-        for j in range(N):
-            # 안전지역의 높이가 강수량보다 높고 한번도 방문하지 않았다면
-            if (safeZone[i][j] > precipitation) and visited[i][j] == 0:
-                dfs(i, j, precipitation)
-                _count += 1
-    count = max(count, _count)
+res = []
+for i in range(max(max_precipitations) + 1):
+    count = 0
+    visited = [[0 for _ in range(N)] for _ in range(N)]
+    for x in range(N):
+        for y in range(N):
+            if graph[x][y] > i and visited[x][y] == 0:
+                visited[x][y] = 1
+                bfs(x, y, i)
+                count += 1
+    res.append(count)
 
-print(count)
+print(max(res))
