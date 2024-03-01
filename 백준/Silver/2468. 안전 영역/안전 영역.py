@@ -9,8 +9,10 @@ for _ in range(N):
     graph.append(_list)
 
 max_precipitations = []
+min_precipitations = []
 for _graph in graph:
     max_precipitations.append(max(_graph))
+    min_precipitations.append(min(_graph))
 
 
 def bfs(a, b, c):
@@ -31,16 +33,16 @@ def bfs(a, b, c):
                     queue.append((nx, ny))
 
 
-res = []
-for i in range(max(max_precipitations) + 1):
-    count = 0
+count = 1
+for i in range(min(min_precipitations), max(max_precipitations) + 1):
+    _count = 0
     visited = [[0 for _ in range(N)] for _ in range(N)]
     for x in range(N):
         for y in range(N):
             if graph[x][y] > i and visited[x][y] == 0:
                 visited[x][y] = 1
                 bfs(x, y, i)
-                count += 1
-    res.append(count)
+                _count += 1
+    count = max(count, _count)
 
-print(max(res))
+print(count)
