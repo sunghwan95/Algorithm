@@ -1,21 +1,33 @@
+import sys
+
+input = sys.stdin.readline
+
 N, M = map(int, input().split())
-nums = list(map(int, input().split()))
 
-nums.sort()
-
-ans = []
+graph = list((map(int, input().split())))
+visited = [0 for _ in range(N)]
+graph.sort()
 
 
 def dfs():
-    if len(ans) == M:
-        print(" ".join(map(str, ans)))
+    if len(res) == M:
+        print(*res)
         return
 
-    for num in nums:
-        if num not in ans:
-            ans.append(num)
+    for i in range(N):
+        if visited[i] == 0:
+            visited[i] = 1
+            res.append(graph[i])
             dfs()
-            ans.pop()
+            res.pop()
+            visited[i] = 0
 
 
-dfs()
+res = []
+for i in range(N):
+    if visited[i] == 0:
+        visited[i] = 1
+        res.append(graph[i])
+        dfs()
+        res.pop()
+        visited[i] = 0
