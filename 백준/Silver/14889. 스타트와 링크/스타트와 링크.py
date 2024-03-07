@@ -11,20 +11,18 @@ visited = [0 for _ in range(N)]
 res = sys.maxsize
 
 
-def dfs(depth, index):
+def dfs(teamMembers, indexOfVisited):
     global res
-    if depth == N // 2:
+    if teamMembers == N // 2:
         startTeam = 0
         linkTeam = 0
 
         for x in range(N):
             for y in range(x, N):
                 if visited[x] == 1 and visited[y] == 1:
-                    startTeam += graph[x][y]
-                    startTeam += graph[y][x]
+                    startTeam += graph[x][y] + graph[y][x]
                 elif visited[x] == 0 and visited[y] == 0:
-                    linkTeam += graph[x][y]
-                    linkTeam += graph[y][x]
+                    linkTeam += graph[x][y] + graph[y][x]
 
         res = min(res, abs(startTeam - linkTeam))
 
@@ -34,10 +32,10 @@ def dfs(depth, index):
 
         return
 
-    for i in range(index, N):
+    for i in range(indexOfVisited, N):
         if visited[i] == 0:
             visited[i] = 1
-            dfs(depth + 1, i)
+            dfs(teamMembers + 1, i + 1)
             visited[i] = 0
 
 
