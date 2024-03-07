@@ -27,6 +27,11 @@ def dfs(depth, index):
                     linkTeam += graph[y][x]
 
         res = min(res, abs(startTeam - linkTeam))
+
+        if res == 0:
+            print(res)
+            exit(0)
+
         return
 
     for i in range(index, N):
