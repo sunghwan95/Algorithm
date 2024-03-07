@@ -18,11 +18,13 @@ def dfs(depth, index):
         linkTeam = 0
 
         for x in range(N):
-            for y in range(N):
+            for y in range(x, N):
                 if visited[x] == 1 and visited[y] == 1:
                     startTeam += graph[x][y]
+                    startTeam += graph[y][x]
                 elif visited[x] == 0 and visited[y] == 0:
                     linkTeam += graph[x][y]
+                    linkTeam += graph[y][x]
 
         res = min(res, abs(startTeam - linkTeam))
         return
