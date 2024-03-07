@@ -1,20 +1,25 @@
+import sys
+
+input = sys.stdin.readline
+
 N, M = map(int, input().split())
-nums = list(map(int, input().split()))
-
-nums.sort()
-
-ans = []
+graph = list(map(int, input().split()))
+graph.sort()
 
 
-def dfs(x):
-    if len(ans) == M:
-        print(" ".join(map(str, ans)))
+def dfs(a):
+    if len(res) == M:
+        print(*res)
         return
 
-    for i in range(x, N):
-        ans.append(nums[i])
+    for i in range(a, N):
+        res.append(graph[i])
         dfs(i)
-        ans.pop()
+        res.pop()
 
 
-dfs(0)
+res = []
+for i in range(N):
+    res.append(graph[i])
+    dfs(i)
+    res.pop()
