@@ -1,4 +1,5 @@
 import sys
+
 input = sys.stdin.readline
 
 N = int(input())
@@ -6,33 +7,36 @@ N = int(input())
 tree = dict()
 
 for _ in range(N):
-    root, left, right = map(str, input().split())
-    tree[root] = (left, right)
+    parent, leftChild, rightChild = map(str, input().split())
+    tree[parent] = (leftChild, rightChild)
 
 
-def preorder(root):
+# 전위순회
+def preOrder(root):
     if root != ".":
         print(root, end="")
-        preorder(tree[root][0])
-        preorder(tree[root][1])
+        preOrder(tree[root][0])
+        preOrder(tree[root][1])
 
 
-def inorder(root):
+# 중위순회
+def inOrder(root):
     if root != ".":
-        inorder(tree[root][0])
+        inOrder(tree[root][0])
         print(root, end="")
-        inorder(tree[root][1])
+        inOrder(tree[root][1])
 
 
-def postorder(root):
+# 후위순회
+def postOrder(root):
     if root != ".":
-        postorder(tree[root][0])
-        postorder(tree[root][1])
+        postOrder(tree[root][0])
+        postOrder(tree[root][1])
         print(root, end="")
 
 
-preorder("A")
+preOrder("A")
 print()
-inorder("A")
+inOrder("A")
 print()
-postorder("A")
+postOrder("A")
