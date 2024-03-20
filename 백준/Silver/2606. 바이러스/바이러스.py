@@ -11,7 +11,7 @@ for _ in range(M):
     a, b = map(int, input().split())
     graph[a][b] = graph[b][a] = 1
 
-ans = []
+res = []
 
 
 def bfs(startingNode):
@@ -26,8 +26,8 @@ def bfs(startingNode):
             if graph[visitedNode][visitingNode] == 1 and visited[visitingNode] == 0:
                 visited[visitingNode] = 1
                 queue.append(visitingNode)
-                ans.append(visitingNode)
+                res.append(visitingNode)
 
 
 bfs(1)
-print(len(ans))
+print(len(res))
