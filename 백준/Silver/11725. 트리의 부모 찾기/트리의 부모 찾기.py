@@ -4,7 +4,7 @@ sys.setrecursionlimit(10**6)
 
 N = int(input())
 
-visited = [0]*(N+1)
+visited = [0 for _ in range(N+1)]
 edges = [[] for _ in range(N+1)]
 
 for _ in range(N-1):
@@ -12,7 +12,7 @@ for _ in range(N-1):
     edges[a].append(b)
     edges[b].append(a)
 
-parent = [0]*(N+1)
+parent = [0 for _ in range(N+1)]
 for i in range(N+1):
     parent[i] = i
 
