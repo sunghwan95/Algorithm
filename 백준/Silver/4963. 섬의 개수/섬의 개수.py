@@ -6,12 +6,11 @@ input = sys.stdin.readline
 def bfs(a, b):
     queue = []
     queue.append((a, b))
-
-    dx = [-1, -1, 1, 1, -1, 1, 0, 0]
-    dy = [-1, 1, -1, 1, 0, 0, -1, 1]
+    visited[a][b] = 1
 
     while queue:
         x, y = queue.pop(0)
+
         for i in range(8):
             nx = x + dx[i]
             ny = y + dy[i]
@@ -22,27 +21,22 @@ def bfs(a, b):
                     queue.append((nx, ny))
 
 
-res = []
 while True:
     w, h = map(int, input().split())
-
     if w == 0 and h == 0:
         break
 
-    graph = []
-    for _ in range(h):
-        _list = list(map(int, input().split()))
-        graph.append(_list)
+    graph = [list(map(int, input().split())) for _ in range(h)]
     visited = [[0 for _ in range(w)] for _ in range(h)]
+
+    dx = [-1, 1, 0, 0, -1, -1, 1, 1]
+    dy = [0, 0, -1, 1, -1, 1, -1, 1]
 
     count = 0
     for x in range(h):
         for y in range(w):
             if graph[x][y] == 1 and visited[x][y] == 0:
-                visited[x][y] = 1
                 bfs(x, y)
                 count += 1
 
-    res.append(count)
-
-print(*res, sep="\n")
+    print(count)
