@@ -1,7 +1,12 @@
+import sys
+
+input = sys.stdin.readline
+
 T = int(input())
+
 for _ in range(T):
     R, S = input().split()
-    p = ""
+    ans = ""
     for i in S:
-        p += int(R)*i
-    print(p)
+        ans += int(R) * i
+    print(ans)
