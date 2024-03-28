@@ -4,29 +4,19 @@ input = sys.stdin.readline
 
 N, M = map(int, input().split())
 
-graph = []
-for i in range(1, N + 1):
-    graph.append(i)
-visited = [0 for _ in range(N)]
-res = []
+nums = []
 
 
 def dfs(a):
-    visited[a] = 1
-
-    if len(res) == M:
-        print(*res)
+    if len(nums) == M:
+        print(*nums)
         return
 
-    for i in range(a, N):
-        if visited[i] == 0:
-            res.append(graph[i])
+    for i in range(a, N + 1):
+        if i not in nums:
+            nums.append(i)
             dfs(i)
-            res.pop()
-            visited[i] = 0
+            nums.pop()
 
 
-for i in range(N):
-    res.append(graph[i])
-    dfs(i)
-    res.pop()
+dfs(1)
