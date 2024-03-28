@@ -1,15 +1,4 @@
-A, B = input().split()
+A, B = map(str, input().split())
 
-arrA = list(A)
-arrB = list(B)
+print(max(A[::-1], B[::-1]))
 
-arrA.reverse()
-arrB.reverse()
-
-strA = "".join(arrA)
-strB = "".join(arrB)
-
-if int(strA) > int(strB):
-    print(strA)
-else:
-    print(strB)
