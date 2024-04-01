@@ -10,35 +10,38 @@ for i in range(N):
     graph.append(a)
 
 
-def rotate_layer(graph, start_row, end_row, start_col, end_col):
-    temp = graph[start_row][start_col]
+def rotate_layer(graph, start_x, end_x, start_y, end_y):
+    temp = graph[start_x][start_y]
 
-    # 왼쪽 세로 줄 이동
-    for i in range(start_col, end_col):
-        graph[start_row][i] = graph[start_row][i + 1]
-    #  아래쪽 가로 줄 이동
-    for i in range(start_row, end_row):
-        graph[i][end_col] = graph[i + 1][end_col]
-    # 오른쪽 세로 줄 이동
-    for i in range(end_col, start_col, -1):
-        graph[end_row][i] = graph[end_row][i - 1]
-    # 위쪽 가로 줄 이동
-    for i in range(end_row, start_row, -1):
-        graph[i][start_col] = graph[i - 1][start_col]
+    # 위쪽 가로줄 반시계 방향 이동
+    for i in range(start_y, end_y):
+        graph[start_x][i] = graph[start_x][i + 1]
 
-    graph[start_row + 1][start_col] = temp
+    # 오른쪽 세로줄 반시계 방향 이동
+    for i in range(start_x, end_x):
+        graph[i][end_y] = graph[i + 1][end_y]
+
+    # 아래쪽 가로줄 반시계 방향 이동
+    for i in range(end_y, start_y, -1):
+        graph[end_x][i] = graph[end_x][i - 1]
+
+    # 왼쪽 세로줄 반시계 방향 이동
+    for i in range(end_x, start_x, -1):
+        graph[i][start_y] = graph[i - 1][start_y]
+
+    graph[start_x + 1][start_y] = temp
 
 
 def rotate_graph(graph, row, col, R):
     for _ in range(R):
-        start_row, start_col = 0, 0
-        end_row, end_col = row - 1, col - 1
-        while start_row < end_row and start_col < end_col:
-            rotate_layer(graph, start_row, end_row, start_col, end_col)
-            start_row += 1
-            start_col += 1
-            end_row -= 1
-            end_col -= 1
+        start_x, start_y = 0, 0
+        end_x, end_y = row - 1, col - 1
+        while start_x < end_x and start_y < end_y:
+            rotate_layer(graph, start_x, end_x, start_y, end_y)
+            start_x += 1
+            start_y += 1
+            end_x -= 1
+            end_y -= 1
 
 
 rotate_graph(graph, N, M, R)
