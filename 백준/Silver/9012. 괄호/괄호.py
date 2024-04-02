@@ -4,24 +4,24 @@ input = sys.stdin.readline
 
 T = int(input())
 
-ans = []
+_ps = []
 for _ in range(T):
-    stk = []
-    strings = input().rstrip()
+    a = input().rstrip()
+    _ps.append(a)
 
-    for string in strings:
-        if string == "(":
-            stk.append(string)
+
+for ps in _ps:
+    stk = []
+    for parenthesis in ps:
+        if parenthesis == "(":
+            stk.append(parenthesis)
         else:
-            if stk:
+            if stk and stk[-1] == "(":
                 stk.pop()
             else:
-                stk.append(string)
-                break
+                stk.append(parenthesis)
 
-    if len(stk) == 0:
-        ans.append("YES")
+    if stk:
+        print("NO")
     else:
-        ans.append("NO")
-
-print(*ans, sep="\n")
+        print("YES")
