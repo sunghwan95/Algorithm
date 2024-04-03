@@ -13,6 +13,6 @@ for string in strings:
             stk.pop()
 
 if stk:
-    print("".join(stk))
+    print(''.join(stk))
 else:
     print('FRULA')
