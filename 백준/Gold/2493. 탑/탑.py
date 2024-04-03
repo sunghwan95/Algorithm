@@ -1,14 +1,19 @@
-N = int(input())
+import sys
 
-towers = list(map(int, input().split()))
+input = sys.stdin.readline
+
+N = int(input())
+nums = list(map(int, input().split()))
 
 stk = []
-result = [0]*N
-for i, tower in enumerate(towers):
-    while stk and stk[-1][1] <= tower:
+ans = [0] * len(nums)
+for idx, num in enumerate(nums):
+    while stk and stk[-1][1] < num:
         stk.pop()
-    if stk:
-        result[i] = stk[-1][0]
-    stk.append([i+1, tower])
 
-print(" ".join(map(str, result)))
+    if stk:
+        ans[idx] = stk[-1][0] + 1
+
+    stk.append((idx, num))
+
+print(*ans)
