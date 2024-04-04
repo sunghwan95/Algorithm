@@ -1,26 +1,20 @@
 import sys
 import heapq
 
-N = int(sys.stdin.readline())
+input = sys.stdin.readline
+
+N = int(input())
 
 heap = []
 for _ in range(N):
-    a = int(sys.stdin.readline())
+    a = int(input())
     heapq.heappush(heap, a)
 
 result = 0
-while True:
-    if N == 1:
-        print(0)
-        break
-
+while len(heap) > 1:
     a = heapq.heappop(heap)
     b = heapq.heappop(heap)
-    heapq.heappush(heap, a+b)
-    result += a+b
+    heapq.heappush(heap, a + b)
+    result += a + b
 
-    if len(heap) == 2:
-        a = heapq.heappop(heap)
-        b = heapq.heappop(heap)
-        print(result+a+b)
-        break
+print(result)
