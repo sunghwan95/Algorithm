@@ -1,19 +1,26 @@
+import sys
+
+input = sys.stdin.readline
+
 N, M = map(int, input().split())
 trees = list(map(int, input().split()))
 
-min_height, max_height = 1, max(trees)
+trees.sort()
 
-while min_height <= max_height:
-    cut_height = (min_height+max_height)//2
-    answer = 0
+min_h = 1
+max_h = max(trees)
 
+while min_h <= max_h:
+    cut_h = (min_h + max_h) // 2
+
+    ans = 0
     for tree in trees:
-        if tree > cut_height:
-            answer += tree-cut_height
+        if tree > cut_h:
+            ans += tree - cut_h
 
-    if answer >= M:
-        min_height = cut_height+1
+    if ans >= M:
+        min_h = cut_h + 1
     else:
-        max_height = cut_height-1
+        max_h = cut_h - 1
 
-print(max_height)
+print(max_h)
