@@ -1,12 +1,13 @@
 import sys
+
 input = sys.stdin.readline
 
 N = int(input())
-arr = list(map(int, input().split()))
+nums = list(map(int, input().split()))
 
-arr.sort()
+nums.sort()
 answer = 0
 
-for x in range(1, N+1):
-    answer += sum(arr[0:x])
+for i in range(1, N + 1):
+    answer += sum(nums[0:i])
 print(answer)
