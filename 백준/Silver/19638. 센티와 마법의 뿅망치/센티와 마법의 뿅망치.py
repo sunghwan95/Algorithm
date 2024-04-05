@@ -8,7 +8,8 @@ N, H, T = map(int, input().split())
 heap = []
 for _ in range(N):
     giant_height = int(input())
-    heapq.heappush(heap, (-giant_height, giant_height))
+    heap.append((-giant_height, giant_height))
+heapq.heapify(heap)
 
 count = 0
 success = False
