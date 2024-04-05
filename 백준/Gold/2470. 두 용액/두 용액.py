@@ -1,28 +1,26 @@
 import sys
 
-N = int(sys.stdin.readline())
+N = int(input())
 
-arr = list(map(int, sys.stdin.readline().split()))
-arr.sort()
+values = list(map(int, input().split()))
+values.sort()
 
 start = 0
-end = N-1
+end = len(values) - 1
+
 min_value = sys.maxsize
-
 while start < end:
-    # 특성값 초기 설정.
-    property_val = arr[start]+arr[end]
+    sum_value = values[start] + values[end]
 
-    # 만약 특성값의 절대값이 기존의 최소값 보다 작다면
-    if abs(property_val) < min_value:
-        min_value = abs(property_val)
-        answer = [arr[start], arr[end]]
+    if abs(sum_value) <= min_value:
+        min_value = abs(sum_value)
+        ans = [values[start], values[end]]
 
-    if property_val < 0:
+    if sum_value < 0:
         start += 1
-    elif property_val > 0:
+    elif sum_value > 0:
         end -= 1
     else:
         break
 
-print(answer[0], answer[1])
+print(*ans)
