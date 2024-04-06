@@ -1,18 +1,16 @@
 import sys
+
 input = sys.stdin.readline
 
-string = list(map(str, input()))
-string.pop()
-check_ppap = ["P", "P", "A", "P"]
-
+strings = input().rstrip()
 
 stk = []
-for i in range(len(string)):
-    stk.append(string[i])
-    if stk[-4:] == check_ppap:
-        for _ in range(4):
+for i in range(len(strings)):
+    stk.append(strings[i])
+    if stk[-4:] == ["P", "P", "A", "P"]:
+        for _ in range(3):
             stk.pop()
-        stk.append("P")
+
 
 if stk == ["P", "P", "A", "P"] or stk == ["P"]:
     print("PPAP")
