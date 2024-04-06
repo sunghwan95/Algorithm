@@ -32,14 +32,14 @@ for _ in range(M):
 
         if output_method == 1:
             while solved_orders[-hard_order[0][1]]:
-                solved_orders[-hard_order[0][1]] = False
                 heapq.heappop(hard_order)
+                solved_orders[-hard_order[0][1]] = False
 
             print(-hard_order[0][1])
         else:
             while solved_orders[easy_order[0][1]]:
-                solved_orders[easy_order[0][1]] = False
                 heapq.heappop(easy_order)
+                solved_orders[easy_order[0][1]] = False
 
             print(easy_order[0][1])
 
