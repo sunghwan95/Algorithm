@@ -11,9 +11,6 @@ for _ in range(M):
     graph[a].append((c, b))
     graph[b].append((c, a))
 
-for island in range(1, N + 1):
-    sorted(graph[island], key=lambda x: -x[0])
-
 weights = [0] * (N + 1)
 a, b = map(int, input().split())
 
