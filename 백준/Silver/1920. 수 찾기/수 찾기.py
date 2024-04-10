@@ -1,31 +1,35 @@
 import sys
-N = int(sys.stdin.readline())
-arr = list(map(int, sys.stdin.readline().split()))
-M = int(sys.stdin.readline())
-nums = list(map(int, sys.stdin.readline().split()))
 
-arr.sort()
+input = sys.stdin.readline
+
+N = int(input())
+nums = list(map(int, input().split()))
+
+M = int(input())
+check_nums = list(map(int, input().split()))
+
+nums.sort()
 
 
-def binary(target):
-    start_index = 0
-    end_index = N-1
+def binary_search(target):
+    start = 0
+    end = N - 1
 
-    while start_index <= end_index:
-        mid_index = (start_index+end_index)//2
+    while start <= end:
+        mid = (start + end) // 2
 
-        if arr[mid_index] == target:
+        if nums[mid] == target:
             return True
-        if target < arr[mid_index]:
-            end_index = mid_index-1
-        elif arr[mid_index] < target :
-            start_index = mid_index+1
+        elif nums[mid] > target:
+            end = mid - 1
         else:
-            return False
+            start = mid + 1
+
+    return False
 
 
-for i in range(M):
-    if binary(nums[i]):
+for check_num in check_nums:
+    if binary_search(check_num):
         print(1)
     else:
         print(0)
