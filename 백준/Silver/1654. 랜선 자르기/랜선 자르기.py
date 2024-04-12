@@ -1,24 +1,30 @@
 import sys
-K, N = map(int, sys.stdin.readline().split())
 
-lines = []
+input = sys.stdin.readline
+
+K, N = map(int, input().split())
+
+cables = []
 for _ in range(K):
-    line = int(sys.stdin.readline())
-    lines.append(line)
+    a = int(input())
+    cables.append(a)
 
-lines.sort()
 start = 1
-end = lines[-1]
+end = max(cables)
 
+ans = 0
 while start <= end:
-    mid = (start+end)//2
-    count = 0
+    mid = (start + end) // 2
 
-    for line in lines:
-        count += line//mid
+    curr_ans = 0
+    for cable in cables:
+        curr_ans += cable // mid
 
-    if count >= N:
-        start = mid+1
-    else:
-        end = mid-1
-print(end)
+    if curr_ans < N:
+        end = mid - 1
+    elif curr_ans >= N:
+        ans = max(ans, mid)
+        start = mid + 1
+
+
+print(ans)
