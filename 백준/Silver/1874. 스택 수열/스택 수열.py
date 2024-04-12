@@ -6,25 +6,25 @@ n = int(input())
 nums = [int(input()) for _ in range(n)]
 
 ans = []
-sequence = []
+stk = []
 
-i = 1
+now_num = 1
 for num in nums:
-    if sequence and sequence[-1] == num:
-        sequence.pop()
+    if stk and stk[-1] == num:
         ans.append("-")
+        stk.pop()
         continue
 
-    for a in range(i, n + 1):
-        sequence.append(a)
+    for i in range(now_num, n + 1):
+        stk.append(i)
         ans.append("+")
-        if a == num:
-            sequence.pop()
+        if i == num:
+            stk.pop()
             ans.append("-")
-            i = a + 1
+            now_num = i + 1
             break
 
-if not sequence:
-    print(*ans, sep="\n")
-else:
+if stk:
     print("NO")
+else:
+    print(*ans, sep="\n")
