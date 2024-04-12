@@ -9,10 +9,12 @@ nums = list(map(int, input().split()))
 heapq.heapify(nums)
 
 for _ in range(m):
-    x = heapq.heappop(nums)
-    y = heapq.heappop(nums)
-    add_num = x + y
-    heapq.heappush(nums, add_num)
-    heapq.heappush(nums, add_num)
+    a = heapq.heappop(nums)
+    b = heapq.heappop(nums)
+
+    c = a + b
+
+    heapq.heappush(nums, c)
+    heapq.heappush(nums, c)
 
 print(sum(nums))
