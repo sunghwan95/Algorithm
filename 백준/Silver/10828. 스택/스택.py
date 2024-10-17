@@ -3,57 +3,33 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
+
 stk = []
-ans = []
-
-
-def push(stk: list, arg: int):
-    stk.append(arg)
-    return
-
-
-def popArg(stk: list):
-    if stk:
-        ans.append(stk.pop())
-    else:
-        ans.append(-1)
-    return
-
-
-def sizeStk(stk: list):
-    ans.append(len(stk))
-    return
-
-
-def isEmpty(stk: list):
-    if stk:
-        ans.append(0)
-    else:
-        ans.append(1)
-    return
-
-
-def topArg(stk: list):
-    if stk:
-        ans.append(stk[-1])
-    else:
-        ans.append(-1)
-    return
-
-
 for _ in range(N):
-    cmd = input().split()
-    keyWord = cmd[0]
+    a = input().split()
+    cmd = a[0]
 
-    if keyWord == "push":
-        push(stk, int(cmd[1]))
-    elif keyWord == "top":
-        topArg(stk)
-    elif keyWord == "size":
-        sizeStk(stk)
-    elif keyWord == "pop":
-        popArg(stk)
-    else:
-        isEmpty(stk)
+    if cmd == "push":
+        num = int(a[1])
+        stk.append(num)
 
-print(*ans, sep="\n")
+    elif cmd == "pop":
+        if stk:
+            print(stk.pop())
+        else:
+            print(-1)
+
+    elif cmd == "size":
+        print(len(stk))
+
+    elif cmd == "empty":
+        if stk:
+            print(0)
+        else:
+            print(1)
+
+    elif cmd == "top":
+        if stk:
+            print(stk[-1])
+        else:
+            print(-1)
