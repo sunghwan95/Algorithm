@@ -4,22 +4,22 @@ input = sys.stdin.readline
 
 T = int(input())
 
-_ps = []
+arr_ps = []
 for _ in range(T):
-    a = input().rstrip()
-    _ps.append(a)
+    ps = input().rstrip()
+    arr_ps.append(ps)
 
-
-for ps in _ps:
+for ps in arr_ps:
     stk = []
-    for parenthesis in ps:
-        if parenthesis == "(":
-            stk.append(parenthesis)
+
+    for string in ps:
+        if string == "(":
+            stk.append(string)
         else:
             if stk and stk[-1] == "(":
                 stk.pop()
             else:
-                stk.append(parenthesis)
+                stk.append(string)
 
     if stk:
         print("NO")
