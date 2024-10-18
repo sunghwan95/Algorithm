@@ -3,9 +3,10 @@ import sys
 input = sys.stdin.readline
 
 while True:
-    strings = input().rstrip()
-    if strings == ".":
-        break
+    strings = list(map(str, input().rstrip(" ")))
+
+    if strings[0] == ".":
+        exit(0)
 
     stk = []
     for string in strings:
@@ -20,10 +21,11 @@ while True:
                 stk.pop()
             else:
                 stk.append(string)
-        elif not stk and string == ")" or string == "]":
+
+        elif not stk and (string == ")" or string == "]"):
             stk.append(string)
 
-    if not stk:
-        print("yes")
-    else:
+    if stk:
         print("no")
+    else:
+        print("yes")
