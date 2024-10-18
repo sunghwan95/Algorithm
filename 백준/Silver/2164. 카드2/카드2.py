@@ -1,13 +1,18 @@
 import sys
 from collections import deque
 
-input = sys.stdin.readline()
+input = sys.stdin.readline
 
-N = int(input)
-queue = deque(list(range(1, N + 1)))
+N = int(input())
 
-while len(queue) > 1:
-    queue.popleft()
-    queue.append(queue.popleft())
+nums = []
+for i in range(1, N + 1):
+    nums.append(i)
 
-print(queue[0])
+nums_q = deque(nums)
+
+while len(nums_q) > 1:
+    nums_q.popleft()
+    nums_q.append(nums_q.popleft())
+
+print(nums_q[0])
