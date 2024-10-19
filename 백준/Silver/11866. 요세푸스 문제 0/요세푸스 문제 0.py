@@ -1,16 +1,21 @@
 import sys
 from collections import deque
 
-N, K = map(int, sys.stdin.readline().split())
-nums = deque()
-answer = []
+input = sys.stdin.readline
 
-for i in range(1, N+1):
-    nums.append(i)
+N, K = map(int, input().split())
 
+nums = deque([])
+for i in range(1, N + 1):
+    nums.append(f"{i}")
+
+ans = []
 while nums:
-    for i in range(K-1):
-        nums.append(nums.popleft())
-    answer.append(nums.popleft())
+    for i in range(1, K + 1):
+        if i == K:
+            ans.append(nums.popleft())
+            break
 
-print("<"+", ".join(map(str, answer))+">")
+        nums.append(nums.popleft())
+
+print("<" + ", ".join(ans) + ">")
