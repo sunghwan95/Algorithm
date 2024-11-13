@@ -4,16 +4,16 @@ import heapq
 input = sys.stdin.readline
 
 N = int(input())
-nums = []
-for _ in range(N):
-    a = int(input())
 
-    if a == 0:
-        if not nums:
-            print(0)
-            continue
+heap = []
+for _ in range(N):
+    x = int(input())
+
+    if x == 0:
+        if heap:
+            print(heapq.heappop(heap)[1])
         else:
-            print(heapq.heappop(nums)[1])
-            continue
+            print(0)
+
     else:
-        heapq.heappush(nums, (-a, a))
+        heapq.heappush(heap, (-x, x))
