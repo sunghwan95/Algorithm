@@ -4,20 +4,28 @@ import heapq
 input = sys.stdin.readline
 
 N = int(input())
-dasom = int(input())
-candidates = []
-for _ in range(N - 1):
-    a = int(input())
-    candidates.append((-a, a))
-heapq.heapify(candidates)
 
-ans = 0
-while candidates:
-    candidate = heapq.heappop(candidates)[1]
-    if candidate >= dasom:
-        candidate -= 1
-        dasom += 1
-        heapq.heappush(candidates, (-candidate, candidate))
-        ans += 1
+heap = []
+for i in range(N):
+    num = int(input())
 
-print(ans)
+    if i == 0:
+        dasom = -num
+    else:
+        heapq.heappush(heap, -num)
+
+if N == 1:
+    print(0)
+    exit(0)
+
+cnt = 0
+while True:
+    now = heapq.heappop(heap)
+
+    if dasom >= now:
+        dasom -= 1
+        heapq.heappush(heap, now + 1)
+        cnt += 1
+    else:
+        print(cnt)
+        break
