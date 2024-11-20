@@ -1,13 +1,18 @@
+import sys
+
+input = sys.stdin.readline
+
 N = int(input())
+
 words = []
-
 for _ in range(N):
-    word = input()
-    words.append((word, len(word)))
+    a = input().rstrip()
+    words.append((a, len(a)))
 
-remove_dup = set(words)
+_words = list(set(words))
 
-sorted_by_length = sorted(remove_dup, key=lambda word: (word[1], word))
+_words.sort(key=lambda x: (x[1], x))
 
-for ele in sorted_by_length:
-    print(ele[0])
+
+for a in _words:
+    print(a[0])
