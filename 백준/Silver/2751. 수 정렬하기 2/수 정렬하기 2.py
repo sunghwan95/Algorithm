@@ -1,11 +1,14 @@
 import sys
-N = int(sys.stdin.readline())
-nums = []
+import heapq
+
+input = sys.stdin.readline
+
+N = int(input())
+
+heap = []
 for _ in range(N):
-    num = int(input())
-    nums.append(num)
+    a = int(input())
+    heapq.heappush(heap, a)
 
-nums.sort()
-
-for num in nums:
-    print(num)
+while heap:
+    print(heapq.heappop(heap))
