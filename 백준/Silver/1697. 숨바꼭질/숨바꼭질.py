@@ -8,42 +8,39 @@ N, K = map(int, input().split())
 graph = [0] * 100001
 visited = [0] * 100001
 
+queue = deque([])
+_len = len(graph)
 
-def bfs(a):
-    queue = deque()
-    queue.append(a)
-    visited[a] = 1
+
+def can_go_next(now, _next):
+    if 0 <= _next < _len and visited[_next] == 0:
+        visited[_next] = 1
+        queue.append(_next)
+        graph[_next] = graph[now] + 1
+
+
+def bfs(start):
+    queue.append(start)
+    visited[start] = 1
 
     while queue:
-        location = queue.popleft()
+        now = queue.popleft()
 
-        if location == K:
-            return graph[location]
+        if now == K:
+            return graph[now]
 
         for i in range(3):
             if i == 0:
-                n_location = location + 1
-
-                if 0 <= n_location < 100001 and visited[n_location] == 0:
-                    visited[n_location] = 1
-                    queue.append(n_location)
-                    graph[n_location] = graph[location] + 1
+                _next = now - 1
+                can_go_next(now, _next)
 
             elif i == 1:
-                n_location = location - 1
-
-                if 0 <= n_location < 100001 and visited[n_location] == 0:
-                    visited[n_location] = 1
-                    queue.append(n_location)
-                    graph[n_location] = graph[location] + 1
+                _next = now + 1
+                can_go_next(now, _next)
 
             else:
-                n_location = location * 2
-
-                if 0 <= n_location < 100001 and visited[n_location] == 0:
-                    visited[n_location] = 1
-                    queue.append(n_location)
-                    graph[n_location] = graph[location] + 1
+                _next = 2 * now
+                can_go_next(now, _next)
 
 
 print(bfs(N))
