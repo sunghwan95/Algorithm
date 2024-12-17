@@ -7,11 +7,10 @@ N = int(input())
 tree = dict()
 
 for _ in range(N):
-    parent, leftChild, rightChild = map(str, input().split())
-    tree[parent] = (leftChild, rightChild)
+    root, left, right = map(str, input().split())
+    tree[root] = (left, right)
 
 
-# 전위순회
 def preOrder(root):
     if root != ".":
         print(root, end="")
@@ -19,7 +18,6 @@ def preOrder(root):
         preOrder(tree[root][1])
 
 
-# 중위순회
 def inOrder(root):
     if root != ".":
         inOrder(tree[root][0])
@@ -27,7 +25,6 @@ def inOrder(root):
         inOrder(tree[root][1])
 
 
-# 후위순회
 def postOrder(root):
     if root != ".":
         postOrder(tree[root][0])
