@@ -4,19 +4,23 @@ input = sys.stdin.readline
 
 N, M = map(int, input().split())
 
-nums = []
+visited = [0] * (N + 1)
+
+ans = []
 
 
-def dfs(a):
-    if len(nums) == M:
-        print(*nums)
+def backtracking(start):
+    if len(ans) == M:
+        print(*ans)
         return
 
-    for i in range(a, N + 1):
-        if i not in nums:
-            nums.append(i)
-            dfs(i)
-            nums.pop()
+    for i in range(start, N + 1):
+        if visited[i] == 0:
+            visited[i] = 1
+            ans.append(i)
+            backtracking(i)
+            ans.pop()
+            visited[i] = 0
 
 
-dfs(1)
+backtracking(1)
