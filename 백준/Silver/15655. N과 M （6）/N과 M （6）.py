@@ -3,30 +3,28 @@ import sys
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
+nums = list(map(int, input().split()))
+nums.sort()
 
-graph = list((map(int, input().split())))
-visited = [0 for _ in range(N)]
-graph.sort()
+visited = [0] * N
+
+ans = []
 
 
-def dfs(a):
-    if len(res) == M:
-        print(*res)
+def backtracking(a):
+    global ans
+
+    if len(ans) == M:
+        print(*ans)
         return
 
     for i in range(a, N):
         if visited[i] == 0:
             visited[i] = 1
-            res.append(graph[i])
-            dfs(i)
-            res.pop()
+            ans.append(nums[i])
+            backtracking(i)
+            ans.pop()
             visited[i] = 0
 
 
-res = []
-for i in range(N):
-    if visited[i] == 0:
-        visited[i] = 1
-        res.append(graph[i])
-        dfs(i)
-        res.pop()
+backtracking(0)
