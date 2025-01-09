@@ -3,23 +3,22 @@ import sys
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
-graph = list(map(int, input().split()))
-graph.sort()
+
+nums = list(map(int, input().split()))
+nums.sort()
+
+ans = []
 
 
-def dfs(a):
-    if len(res) == M:
-        print(*res)
+def backtracking(a):
+    if len(ans) == M:
+        print(*ans)
         return
 
     for i in range(a, N):
-        res.append(graph[i])
-        dfs(i)
-        res.pop()
+        ans.append(nums[i])
+        backtracking(i)
+        ans.pop()
 
 
-res = []
-for i in range(N):
-    res.append(graph[i])
-    dfs(i)
-    res.pop()
+backtracking(0)
