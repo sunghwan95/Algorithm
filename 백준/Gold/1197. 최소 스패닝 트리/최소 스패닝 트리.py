@@ -1,29 +1,28 @@
 import sys
 
+sys.setrecursionlimit(10**6)
+
 input = sys.stdin.readline
 
 V, E = map(int, input().split())
 
-graph = []
-for _ in range(E):
-    A, B, C = map(int, input().split())
-    graph.append((A, B, C))
-graph = sorted(graph, key=lambda x: x[2])
+graph = [list(map(int, input().split())) for _ in range(E)]
+graph.sort(key=lambda x: x[2])
 
 parent = [0] * (V + 1)
 for i in range(1, V + 1):
     parent[i] = i
 
 
-def find_parent(x):
+def find(x):
     if parent[x] != x:
-        parent[x] = find_parent(parent[x])
+        parent[x] = find(parent[x])
     return parent[x]
 
 
-def union_parent(a, b):
-    a = find_parent(a)
-    b = find_parent(b)
+def union(a, b):
+    a = find(a)
+    b = find(b)
 
     if a < b:
         parent[b] = a
@@ -33,10 +32,10 @@ def union_parent(a, b):
 
 ans = 0
 for i in range(E):
-    a, b, cost = graph[i]
+    node, edge, cost = graph[i]
 
-    if find_parent(a) != find_parent(b):
-        union_parent(a, b)
+    if find(node) != find(edge):
+        union(node, edge)
         ans += cost
 
 print(ans)
